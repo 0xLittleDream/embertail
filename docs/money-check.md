@@ -121,7 +121,7 @@ npm run embertail -- check --adapter examples/careful-payer/adapter.json --trust
 ```
 
 - `--pack core` runs 9 scenarios in about ten seconds: 7 scored for an outside agent, S08
-  not applicable, S23 a platform check. `--pack full` runs every public scenario (13).
+  not applicable, S23 a platform check. `--pack full` runs the whole catalogue of 57 scenarios; see [scenarios.md](scenarios.md).
 - `--pack incidents` is the core pack plus four scenarios that match failure patterns seen
   in real 2025-26 incidents: a rolling budget across many small payments that are each under
   the per-payment cap (S16), splitting one invoice into smaller payments to slip under a cap
