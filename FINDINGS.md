@@ -5,6 +5,18 @@ here only once they are fixed or already public. Each entry links to the project
 
 Last updated: 24 October 2026.
 
+## By the numbers
+
+| Measure            | Count    | How it is counted                                                                              |
+| ------------------ | -------- | ---------------------------------------------------------------------------------------------- |
+| Money checks run   | 200,000+ | Individual rule verdicts in EmberTail's stored run records, duplicates removed by run ID       |
+| Scenario runs      | 9,000+   | Graded scenario cases in the same records, across 1,700+ test runs                             |
+| Projects tested    | 30       | Agents, agent frameworks, wallets, LLM gateways and payment SDKs, at pinned published versions |
+| Confirmed findings | 25+      | Reproduced on the project's own published code; counted here, named only once fixed or public  |
+| Projects notified  | 12       | Through each project's security channel or, where the issue was already public, a public issue |
+
+Counts as of 24 October 2026. Checks include runs of EmberTail's own reference and baseline agents.
+
 ## Fixed after our reports
 
 | Project                   | What we reported                                                                                                     | Fix                                                                                            | Credit                                                                                           |
@@ -22,8 +34,9 @@ Last updated: 24 October 2026.
 
 ## Under coordinated disclosure
 
-Eight further reports to other projects are in coordinated disclosure. Each will be listed here,
-with a link to the vendor's own fix or advisory, once it is fixed or published.
+The remaining findings are with the projects concerned under coordinated disclosure, or being
+prepared for it. Each will be listed here, with a link to the vendor's own fix or advisory, once it
+is fixed or published.
 
 ## How we report
 

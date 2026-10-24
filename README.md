@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img alt="57 agent scenarios, 14 money rules, 3 projects fixed after our reports, 2 public credits, 8 reports in disclosure" src="assets/stats.svg" width="100%">
+  <img alt="200,000+ money checks run, 9,000+ scenario runs, 30 projects tested, 25+ confirmed findings; 57 scenarios, 14 money rules, 12 projects notified, fixes shipped by ClawRouter, Franklin and NOFX" src="assets/stats.png" width="100%">
 </p>
 
 AI agents now pay invoices, buy API calls, hold wallets and spend from budgets. When they get money
@@ -65,7 +65,7 @@ Requires Node.js 24 or later.
 ## How it works
 
 <p align="center">
-  <img alt="Your agent talks to a simulated world with seeded faults; a grader checks its claims against the ledger and writes reports" src="assets/how-it-works.svg" width="100%">
+  <img alt="Your agent talks to a simulated world with seeded faults; a grader checks its claims against the ledger and writes reports" src="assets/how-it-works.png" width="100%">
 </p>
 
 Your agent runs as an ordinary local process. It sees only its task, its mandate (limits, allowed
@@ -75,7 +75,7 @@ transaction that reverted, the invoice from a look-alike supplier, the crash in 
 payment. Then it compares what the agent **said** with what the ledger **shows**.
 
 <p align="center">
-  <img alt="When it fails, you see exactly where the money went: a $200 invoice paid twice" src="assets/evidence-where-the-money-went.jpg" width="80%">
+  <img alt="Real evidence from one scenario: the payment service replied success, the ledger shows the transfer reverted and the supplier received $0.00, yet the agent reported the invoice paid. Verdict: FAIL" src="assets/evidence-where-the-money-went.png" width="100%">
 </p>
 
 ## What it checks
@@ -113,7 +113,9 @@ that charges a transfer fee). Each failure comes with the reason and replayable 
 
 ## Track record
 
-EmberTail reports problems privately, waits for the fix, and only then writes them up.
+EmberTail has run more than 200,000 money checks across 9,000+ scenario runs and 30 projects:
+AI agents, wallets, LLM gateways and payment SDKs. That work produced 25+ confirmed findings, reported
+to 12 projects so far. We report privately, wait for the fix, and only then write it up.
 
 | Project                                                  | What we found                                                    | Outcome                       |
 | -------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------- |
@@ -129,8 +131,8 @@ EmberTail reports problems privately, waits for the fix, and only then writes th
   <img alt="Franklin's unclear-reply failures before and after 3.49.7" src="assets/franklin-before-after.svg" width="100%">
 </p>
 
-Eight further reports are in coordinated disclosure and will be published here once fixed. See
-[FINDINGS.md](FINDINGS.md), and [ERRATA.md](ERRATA.md) for our own mistakes: a referee is judged
+The remaining findings are in coordinated disclosure, or being prepared for it, and will be
+published here once fixed. See [FINDINGS.md](FINDINGS.md), and [ERRATA.md](ERRATA.md) for our own mistakes: a referee is judged
 by its error rate.
 
 ## Documentation
