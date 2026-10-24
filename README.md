@@ -123,8 +123,10 @@ EmberTail reports problems privately, waits for the fix, and only then writes th
 | [Coinbase AgentKit](docs/case-studies/agentkit.md)       | Reverted transfers reported as paid; approvals always "failed"   | Public issues; fixes proposed |
 
 <p align="center">
-  <img alt="ClawRouter's cap before and after the fix" src="assets/clawrouter-before-after.svg" width="49%">
-  <img alt="Franklin's unclear-reply failures before and after 3.49.7" src="assets/franklin-before-after.svg" width="49%">
+  <img alt="ClawRouter's cap before and after the fix" src="assets/clawrouter-before-after.svg" width="100%">
+</p>
+<p align="center">
+  <img alt="Franklin's unclear-reply failures before and after 3.49.7" src="assets/franklin-before-after.svg" width="100%">
 </p>
 
 Eight further reports are in coordinated disclosure and will be published here once fixed. See
