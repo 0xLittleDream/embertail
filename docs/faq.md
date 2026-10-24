@@ -56,3 +56,20 @@ libraries, report problems privately, and publish them once fixed. See the
 Yes, for any purpose including production pipelines, except offering it as a competing commercial
 service. Each release becomes Apache-2.0 two years after it is published. The adapter SDK is
 Apache-2.0 today. See [LICENSE.md](../LICENSE.md).
+
+## Is Money Check open source?
+
+Not as the Open Source Initiative defines it. It is source-available under the Functional Source
+License (FSL-1.1-ALv2), one of the "Fair Source" licences: you may use, copy and modify it for free,
+including inside your company and in production pipelines, but not offer it as a competing
+commercial service. Each release becomes open source under Apache-2.0 two years after it is
+published. The adapter SDK is Apache-2.0 today.
+
+## What does EmberTail do that Money Check does not?
+
+Money Check tests your agent's decisions on a simulated ledger, and it is free. EmberTail's paid
+work tests the payment software underneath the agent: your gateway, wallet SDK or payment client.
+That work uses private component tests and test set-ups that are not in this repository, can prove
+results on a local chain, a mainnet fork or a test network, and ends with an independent written
+report and a retest after your fix. The comparison is in the
+[README](../README.md#what-is-free-and-what-embertail-does-beyond-it).

@@ -233,18 +233,33 @@ file. Publish it from your CI and add the badge to your own README:
 
 ## Roadmap
 
-- **Component packs:** test gateways and payment SDKs directly for the five component rules
-  (unknown cost counted as zero, limits that fail open, uncapped defaults, charging for failed
-  delivery, revocation).
 - **Adapters for popular agent frameworks**, so connecting an existing agent takes minutes.
-- **Release-by-release re-checks**, so a dependency upgrade that breaks a money rule is caught the
-  day it ships.
 - **An npm package** for installing Money Check without cloning.
 
-## Work with EmberTail
+Component tests for gateways and payment SDKs, and re-checks on every new release of the software
+you depend on, are part of EmberTail's paid work (below). They are not planned for this
+repository.
 
-Money Check is the free front door. For deeper testing of a gateway, wallet SDK or complete agent
-stack, with a written report and a retest, see [embertail.xyz](https://embertail.xyz).
+## What is free, and what EmberTail does beyond it
+
+Money Check is the free part of EmberTail, and it stays free. It tests your agent's decisions on a
+simulated ledger. Testing the payment software underneath your agent is the work EmberTail does
+with you.
+
+|                | Money Check (this repository, free)                          | With EmberTail (paid)                                                                   |
+| -------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| What is tested | Your agent's decisions, on a simulated ledger                | Your real gateway, wallet SDK or payment client                                         |
+| Tests          | 57 public agent scenarios                                    | The same, plus private component tests and test set-ups that are not in this repository |
+| Proof          | Simulated ledger                                             | Also a local chain, a mainnet fork or a test network, with test funds only              |
+| Who runs it    | You, on your machine or in CI                                | EmberTail, independently of your team                                                   |
+| What you get   | Pass or fail per money rule, replayable evidence, CI reports | A written report with replayable evidence, and a retest after your fix                  |
+| Where          | Your machine or CI                                           | Also the hosted workbench (private beta)                                                |
+
+Kept out of this repository: the component scenarios S29 to S36, the wallet test sets, the test
+set-ups for individual vendors' software, the hosted workbench and the investigator. Most of the
+findings in [FINDINGS.md](FINDINGS.md) came from that work, not from the agent scenarios here.
+
+To talk about a review: [embertail.xyz](https://embertail.xyz).
 
 ## Limits
 
@@ -259,5 +274,8 @@ covers the scenarios and versions recorded in the run, nothing more.
   any purpose, including testing your own agents in production pipelines, except offering it as a
   competing commercial service. Each release becomes Apache-2.0 two years after publication. See
   [LICENSE.md](LICENSE.md).
+
+That makes Money Check source-available ("Fair Source"), not open source as the Open Source
+Initiative defines it. Each release becomes open source when it turns Apache-2.0.
 
 Security issues in Money Check itself: [SECURITY.md](SECURITY.md).

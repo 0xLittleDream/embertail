@@ -5,6 +5,7 @@ EmberTail's agent scenario catalogue: **57 scenarios** across 12 families, grade
 - **48** can be run against your own agent today; 9 need a task the adapter protocol cannot yet give an outside agent and run only against EmberTail's built-in reference agents.
 - Packs: `core` (9), `incidents` (core + 4), `full` (all). Run any set by ID: `--pack S19,S37`.
 - This page is generated from `fixtures/local-finance-v1/scenarios.json` and the rule map in `packages/reports/src/money-check.ts`.
+- Scenario numbers run from S01 to S65. S29 to S36 are not in this catalogue: they test payment components (gateways, wallet SDKs and payment clients) rather than an agent, need EmberTail's component runner, and are used in EmberTail's paid reviews.
 
 ## Money rules
 
