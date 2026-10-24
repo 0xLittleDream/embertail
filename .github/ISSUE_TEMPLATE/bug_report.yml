@@ -1,0 +1,33 @@
+name: Bug report
+description: Money Check behaved wrongly (a crash, a wrong verdict, a confusing message)
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. For a security problem in Money Check itself, please use the Security tab instead of a public issue.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The command you ran, what you expected, and what you got.
+    validations:
+      required: true
+  - type: input
+    id: run
+    attributes:
+      label: Run ID
+      description: From the summary. `npm run embertail -- replay <run-id> --verify` lets us reproduce it.
+  - type: input
+    id: version
+    attributes:
+      label: Version and platform
+      placeholder: 'commit or release, Node.js version, OS'
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: Is the verdict itself wrong?
+      options:
+        - 'No, something else is wrong'
+        - 'Yes, a correct agent was failed'
+        - 'Yes, a wrong agent was passed'

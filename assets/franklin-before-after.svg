@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 310" width="1200" height="310" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1200" height="310" rx="18" fill="#110d0b" stroke="#3a2f28"/>
+<text x="40" y="52" fill="#ede6dc" font-size="24" font-weight="700">Franklin: unclear replies, before and after 3.49.7</text>
+<text x="40" y="82" fill="#a59a90" font-size="15">Counts across the study&#x27;s sessions on release 3.49.6 and on the published 3.49.7.</text>
+<text x="40" y="150" fill="#ede6dc" font-size="16" font-weight="600">Double payments</text>
+<rect x="360" y="134" width="482.60869565217394" height="20" rx="6" fill="#f87171"/><text x="850.608695652174" y="150" fill="#f87171" font-size="14" font-weight="700">before: 3</text>
+<rect x="360" y="160" width="2" height="20" rx="6" fill="#4ade80"/><text x="368.0" y="176" fill="#4ade80" font-size="14" font-weight="700">after: 0</text>
+<text x="40" y="220" fill="#ede6dc" font-size="16" font-weight="600">False &#x27;unpaid&#x27; records</text>
+<rect x="360" y="204" width="643.4782608695652" height="20" rx="6" fill="#f87171"/><text x="1011.4782608695652" y="220" fill="#f87171" font-size="14" font-weight="700">before: 4</text>
+<rect x="360" y="230" width="2" height="20" rx="6" fill="#4ade80"/><text x="368.0" y="246" fill="#4ade80" font-size="14" font-weight="700">after: 0</text>
+</svg>

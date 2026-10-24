@@ -8,7 +8,7 @@
 <h3 align="center">Test whether your AI agent keeps money correct, before it touches real money.</h3>
 
 <p align="center">
-  <a href="https://github.com/0xLittleDream/money-check/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/0xLittleDream/money-check/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/0xLittleDream/embertail/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/0xLittleDream/embertail/actions/workflows/ci.yml/badge.svg"></a>
   <img alt="Scenarios" src="https://img.shields.io/badge/scenarios-57-f2591d">
   <img alt="Money rules" src="https://img.shields.io/badge/money%20rules-14-ede6dc">
   <a href="LICENSE.md"><img alt="Licence" src="https://img.shields.io/badge/licence-FSL--1.1--ALv2-6b5d52"></a>
@@ -28,10 +28,14 @@ agent does against an independent record of where the money actually went.
 No real funds. No blockchain. No network. No account. Everything runs on your machine, and every
 result can be replayed and verified offline.
 
+<p align="center">
+  <img alt="A Money Check run, scenario by scenario (summarised from a real run)" src="assets/terminal-demo.svg" width="100%">
+</p>
+
 ## Two minutes to a verdict
 
 ```bash
-git clone https://github.com/0xLittleDream/money-check.git && cd money-check
+git clone https://github.com/0xLittleDream/embertail.git && cd embertail
 npm ci
 npm run embertail -- check --adapter examples/careful-payer/adapter.json --trusted-agent --pack incidents
 ```
@@ -48,6 +52,15 @@ npm run embertail -- check --adapter examples/baselines/blind-payer.json --trust
 </p>
 
 Requires Node.js 24 or later.
+
+## Who it is for
+
+- **Teams building agents that pay**: invoice agents, procurement and expense agents, trading and
+  treasury agents, agents that buy API calls. Catch the double payment before a customer does.
+- **Wallet, payment SDK and agent-commerce teams**: show your integrators what correct behaviour
+  looks like, and prove your examples handle timeouts, reverts and retries.
+- **Security, risk and procurement reviewers**: ask a vendor for a Money Check run instead of a
+  promise. Every result is replayable and verifiable offline.
 
 ## How it works
 
@@ -109,9 +122,25 @@ EmberTail reports problems privately, waits for the fix, and only then writes th
 | [NOFX](docs/case-studies/nofx.md)                        | One request produced several redeemable payment authorizations   | Fixed in #1549                |
 | [Coinbase AgentKit](docs/case-studies/agentkit.md)       | Reverted transfers reported as paid; approvals always "failed"   | Public issues; fixes proposed |
 
+<p align="center">
+  <img alt="ClawRouter's cap before and after the fix" src="assets/clawrouter-before-after.svg" width="49%">
+  <img alt="Franklin's unclear-reply failures before and after 3.49.7" src="assets/franklin-before-after.svg" width="49%">
+</p>
+
 Eight further reports are in coordinated disclosure and will be published here once fixed. See
 [FINDINGS.md](FINDINGS.md), and [ERRATA.md](ERRATA.md) for our own mistakes: a referee is judged
 by its error rate.
+
+## Documentation
+
+| Start here                                   |                                                                                    |
+| -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [Getting started](docs/getting-started.md)   | Connect your own agent in 15 minutes and fix the usual first failures              |
+| [Scenario catalogue](docs/scenarios.md)      | All 57 scenarios and the 14 money rules                                            |
+| [Money Check reference](docs/money-check.md) | Options, packs, outputs, exit codes, the GitHub Action                             |
+| [Architecture](docs/architecture.md)         | How the simulated world, evidence chain and grader fit together                    |
+| [FAQ](docs/faq.md)                           | Real money? Language models? Certification? How is this different from unit tests? |
+| [Case studies](docs/case-studies/README.md)  | Real problems EmberTail found and saw fixed                                        |
 
 ## Connect your agent
 
@@ -131,7 +160,7 @@ trust.
 
 ```yaml
 - uses: actions/checkout@v4
-- uses: 0xLittleDream/money-check/action@v0.1.0
+- uses: 0xLittleDream/embertail/action@v0.1.0
   with:
     adapter: path/to/your-agent.json
     pack: incidents
@@ -140,6 +169,17 @@ trust.
 Outputs a readable summary in the job, JUnit XML, SARIF alerts for GitHub code scanning, a badge
 and JSON. Exit codes: `0` pass, `1` a money rule failed, `2` not established (with
 `fail-on: inconclusive`), `3` error. Details: [docs/money-check.md](docs/money-check.md).
+
+## Show that your agent passes
+
+Every run writes `badge.json`, a [shields.io endpoint](https://shields.io/badges/endpoint-badge)
+file. Publish it from your CI and add the badge to your own README:
+
+```markdown
+![Money Check](https://img.shields.io/endpoint?url=<where-you-publish>/badge.json)
+```
+
+<img alt="Example badge" src="https://img.shields.io/badge/money%20check-7%2F7%20rules%20pass-4ade80">
 
 ## Roadmap
 

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 310" width="1200" height="310" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1200" height="310" rx="18" fill="#110d0b" stroke="#3a2f28"/>
+<text x="40" y="52" fill="#ede6dc" font-size="24" font-weight="700">ClawRouter: the spending cap, before and after the fix</text>
+<text x="40" y="82" fill="#a59a90" font-size="15">Cap 0.012 of a test token, each request 0.008. Settled amounts from our runs (version 0.12.282 vs pull request #440).</text>
+<line x1="701.5384615384617" y1="110" x2="701.5384615384617" y2="260" stroke="#ede6dc" stroke-dasharray="5 5" stroke-opacity="0.6"/><text x="707.5384615384617" y="122" fill="#ede6dc" font-size="13">cap 0.012</text>
+<text x="40" y="150" fill="#ede6dc" font-size="16" font-weight="600">Three requests at once</text>
+<rect x="360" y="134" width="683.0769230769232" height="20" rx="6" fill="#f87171"/><text x="1051.0769230769233" y="150" fill="#f87171" font-size="14" font-weight="700">before: 0.024</text>
+<rect x="360" y="160" width="227.6923076923077" height="20" rx="6" fill="#4ade80"/><text x="595.6923076923077" y="176" fill="#4ade80" font-size="14" font-weight="700">after: 0.008</text>
+<text x="40" y="220" fill="#ede6dc" font-size="16" font-weight="600">Payment settles, reply lost</text>
+<rect x="360" y="204" width="455.3846153846154" height="20" rx="6" fill="#f87171"/><text x="823.3846153846155" y="220" fill="#f87171" font-size="14" font-weight="700">before: 0.016</text>
+<rect x="360" y="230" width="227.6923076923077" height="20" rx="6" fill="#4ade80"/><text x="595.6923076923077" y="246" fill="#4ade80" font-size="14" font-weight="700">after: 0.008</text>
+</svg>

@@ -1,0 +1,28 @@
+name: Scenario proposal
+description: Suggest a new money failure for the catalogue
+labels: [scenario]
+body:
+  - type: textarea
+    id: failure
+    attributes:
+      label: The real-world failure
+      description: What goes wrong with money, and a public source (incident write-up, issue, paper) if there is one.
+    validations:
+      required: true
+  - type: input
+    id: rule
+    attributes:
+      label: Money rule
+      description: Which EMI rule it falls under, if you know (see docs/scenarios.md).
+  - type: textarea
+    id: correct
+    attributes:
+      label: What a correct agent does
+    validations:
+      required: true
+  - type: textarea
+    id: failing
+    attributes:
+      label: What a failing agent does
+    validations:
+      required: true

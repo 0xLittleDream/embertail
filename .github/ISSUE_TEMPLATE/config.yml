@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security problem in Money Check
+    url: https://github.com/0xLittleDream/embertail/security/advisories/new
+    about: Please report security problems privately.
+  - name: Work with EmberTail
+    url: https://embertail.xyz
+    about: Deeper testing of gateways, wallet SDKs and agent stacks.
