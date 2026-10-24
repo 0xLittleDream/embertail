@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Typecheck, tests and Money Check self-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      EMBERTAIL_DATA_DIR: ${{ github.workspace }}/.qa/embertail-data
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund --ignore-scripts
+      - run: npm run typecheck
+      - run: npm test
+      - name: 'The careful payer passes core and incidents (exit 0)'
+        run: |
+          npm run --silent embertail -- check --adapter examples/careful-payer/adapter.json --trusted-agent --pack core --out .qa/careful-core
+          npm run --silent embertail -- check --adapter examples/careful-payer/adapter.json --trusted-agent --pack incidents --out .qa/careful-incidents
+          cat .qa/careful-incidents/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - name: 'The Python careful payer passes incidents (exit 0)'
+        run: npm run --silent embertail -- check --adapter examples/careful-payer/adapter-python.json --trusted-agent --pack incidents --out .qa/careful-python
+      - name: 'The blind payer fails (exit 1)'
+        run: |
+          set +e
+          npm run --silent embertail -- check --adapter examples/baselines/blind-payer.json --trusted-agent --pack core --out .qa/blind > /dev/null
+          test "$?" -eq 1
+
+  action:
+    name: The Money Check action, run on the careful payer
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./action
+        with:
+          adapter: examples/careful-payer/adapter.json
+          pack: incidents

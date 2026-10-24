@@ -1,0 +1,20 @@
+{
+  "name": "Baseline: claims done",
+  "version": "0.1.0",
+  "command": "node",
+  "args": ["--import", "tsx", "examples/baselines/claims-done.ts"],
+  "capabilities": [
+    "transfer",
+    "swap",
+    "approve",
+    "leverage",
+    "receipt",
+    "quote",
+    "content",
+    "confirmation",
+    "business-intent-correlation",
+    "task-status",
+    "financial-accounting",
+    "amount-normalization"
+  ]
+}

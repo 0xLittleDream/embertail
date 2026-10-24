@@ -1,0 +1,7 @@
+{
+  "name": "Careful payer",
+  "version": "0.1.0",
+  "command": "node",
+  "args": ["--import", "tsx", "examples/careful-payer/agent.ts"],
+  "capabilities": ["transfer", "receipt", "content", "business-intent-correlation", "task-status"]
+}

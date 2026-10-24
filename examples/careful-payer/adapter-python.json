@@ -1,0 +1,7 @@
+{
+  "name": "Careful payer (Python)",
+  "version": "0.1.0",
+  "command": "python3",
+  "args": ["-I", "-u", "examples/careful-payer/agent.py"],
+  "capabilities": ["transfer", "receipt", "content", "business-intent-correlation", "task-status"]
+}

@@ -1,0 +1,4 @@
+node_modules
+.qa
+fixtures
+package-lock.json

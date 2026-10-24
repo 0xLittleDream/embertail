@@ -1,0 +1,84 @@
+name: EmberTail Money Check
+description: Test whether your AI agent keeps money correct, on every pull request.
+author: EmberTail
+branding:
+  icon: shield
+  color: orange
+
+inputs:
+  adapter:
+    description: Path to your agent's EmberTail adapter descriptor (JSON), relative to the repository root.
+    required: true
+  pack:
+    description: Scenario pack to run (core, incidents, milestone, full) or comma-separated scenario IDs.
+    default: core
+  guard:
+    description: Simulator guard, reference (hard limits only) or strict.
+    default: reference
+  fail-on:
+    description: Fail the job on FAIL only (fail), or on INCONCLUSIVE too (inconclusive).
+    default: fail
+  out:
+    description: Directory for the Money Check outputs.
+    default: embertail-money-check
+  upload-sarif:
+    description: 'Upload results.sarif to GitHub code scanning. Requires the security-events: write permission.'
+    default: 'false'
+
+outputs:
+  verdict:
+    description: PASS, FAIL or INCONCLUSIVE.
+    value: ${{ steps.check.outputs.verdict }}
+  exit-code:
+    description: 0 pass, 1 fail, 2 inconclusive (with fail-on inconclusive) or cancelled, 3 error.
+    value: ${{ steps.check.outputs.exit-code }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+
+    - name: Install EmberTail
+      shell: bash
+      run: npm ci --prefix "${{ github.action_path }}/.." --no-audit --no-fund
+
+    - name: Run Money Check
+      id: check
+      shell: bash
+      env:
+        EMBERTAIL_DATA_DIR: ${{ runner.temp }}/embertail-data
+      # The agent named in the adapter descriptor is your own code, run on your own
+      # runner, so the action acknowledges it as trusted. EmberTail does not sandbox it.
+      run: |
+        set +e
+        "${{ github.action_path }}/../node_modules/.bin/tsx" "${{ github.action_path }}/../apps/cli/src/money-check-cli.ts" check \
+          --adapter "${{ inputs.adapter }}" --trusted-agent \
+          --pack "${{ inputs.pack }}" --guard "${{ inputs.guard }}" \
+          --fail-on "${{ inputs.fail-on }}" --out "${{ inputs.out }}"
+        code=$?
+        if [ -f "${{ inputs.out }}/summary.md" ]; then
+          cat "${{ inputs.out }}/summary.md" >> "$GITHUB_STEP_SUMMARY"
+          echo "verdict=$(node -e 'console.log(require(require("path").resolve(process.argv[1])).verdict)' "${{ inputs.out }}/result.json")" >> "$GITHUB_OUTPUT"
+        fi
+        echo "exit-code=$code" >> "$GITHUB_OUTPUT"
+
+    - name: Upload Money Check outputs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: embertail-money-check
+        path: ${{ inputs.out }}
+
+    - name: Upload SARIF to code scanning
+      if: always() && inputs.upload-sarif == 'true'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ inputs.out }}/results.sarif
+        category: embertail-money-check
+
+    - name: Fail on money-rule violations
+      if: steps.check.outputs.exit-code != '0'
+      shell: bash
+      run: exit ${{ steps.check.outputs.exit-code }}

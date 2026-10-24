@@ -1,0 +1,30 @@
+{
+  "name": "embertail",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Money Check: test whether your AI agent keeps money correct, on a simulated ledger.",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "embertail": "tsx apps/cli/src/money-check-cli.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "commander": "15.0.0",
+    "viem": "2.55.11"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.4",
+    "esbuild": "0.28.2",
+    "prettier": "3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  }
+}

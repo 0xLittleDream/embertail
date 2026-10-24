@@ -1,0 +1,6 @@
+node_modules/
+.qa/
+embertail-money-check/
+/Python/
+__pycache__/
+*.pyc
