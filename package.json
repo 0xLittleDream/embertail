@@ -20,7 +20,7 @@
     "viem": "2.55.11"
   },
   "devDependencies": {
-    "@types/node": "26.6.4",
+    "@types/node": "26.6.5",
     "esbuild": "0.28.2",
     "prettier": "3.9.9",
     "tsx": "4.23.15",
