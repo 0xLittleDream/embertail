@@ -88,10 +88,9 @@ Complete examples:
   takes no instructions from it, pays only what the mandate allows, reads the ledger after
   every payment, waits out a pending payment, and after an unclear reply resends only when
   nothing is recorded, under the same request ID.
-- `examples/invoice-agent/agent.ts` and its Python port `examples/python-invoice-agent/agent.py`:
-  a deliberately conservative agent. It never resends after a timeout and does not wait for
-  confirmations, so it **fails** EMI-12 on S37 (it gives up on a payment that was never made)
-  and leaves S05 and S20 not established. It shows what over-caution costs.
+- `examples/baselines/`: three deliberately bad agents that must fail. `blind-payer` pays
+  whatever it is told, `claims-done` reports success without paying, and `do-nothing` takes no
+  action. They show that the grader catches failures, not only that it passes a good agent.
 
 Then describe how to start your agent in an **adapter descriptor**:
 
@@ -122,8 +121,7 @@ npm run embertail -- check --adapter examples/careful-payer/adapter.json --trust
 ```
 
 - `--pack core` runs 9 scenarios in about ten seconds: 7 scored for an outside agent, S08
-  not applicable, S23 a platform check. Use `--pack full` for the full
-  catalogue.
+  not applicable, S23 a platform check. `--pack full` runs every public scenario (13).
 - `--pack incidents` is the core pack plus four scenarios that match failure patterns seen
   in real 2025-26 incidents: a rolling budget across many small payments that are each under
   the per-payment cap (S16), splitting one invoice into smaller payments to slip under a cap
@@ -135,26 +133,6 @@ npm run embertail -- check --adapter examples/careful-payer/adapter.json --trust
 
 **Exit codes:** `0` pass · `1` a money rule failed · `2` inconclusive (with
 `--fail-on inconclusive`) or cancelled · `3` error.
-
-### Without the EmberTail repository
-
-`npm run package:money-check` builds a self-contained package, `embertail-check`, with no
-runtime dependencies: one bundled CLI, the scenario data, the careful-payer example (Node
-and Python) and both adapter helpers. It writes the package and its `.tgz` to
-`.qa/money-check-package/` (change it with `-- --out <dir>`). The package is marked private
-and is not on npm; it is shared as a file.
-
-```bash
-npm install ./embertail-check-0.1.0-beta.1.tgz
-npx embertail-check check --adapter my-agent.json --trusted-agent --pack core
-```
-
-`npx embertail-check replay <run-id> --verify` and `npx embertail-check report <run-id>`
-work on the runs it leaves behind. `npm run smoke:money-check-package -- <tgz>` installs a
-`.tgz` into a fresh folder and checks that the example passes there.
-
-The bundle carries no source tree, so the build records the source hashes it was built from
-(`BUILD.json` in the package); run manifests use them exactly as a source run would.
 
 ## 3. What you get
 
@@ -169,7 +147,7 @@ Written to `embertail-money-check/` (change it with `--out`):
 | `result.json`   | The machine-readable result                                                                                           |
 
 Every result can be replayed and its evidence verified offline:
-`embertail replay <run-id> --verify`.
+`npm run embertail -- replay <run-id> --verify`.
 
 ## 4. Run it on every pull request
 
@@ -184,7 +162,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: <embertail-action-location>/action
+      - uses: 0xLittleDream/money-check/action@v0.1.0
         with:
           adapter: my-agent.json
           pack: core

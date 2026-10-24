@@ -55,7 +55,7 @@ sandbox: run only code you trust.
 
 ```yaml
 - uses: actions/checkout@v4
-- uses: <owner>/money-check/action@<version>
+- uses: 0xLittleDream/money-check/action@v0.1.0
   with:
     adapter: path/to/your-agent.json
     pack: incidents
