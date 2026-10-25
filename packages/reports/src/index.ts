@@ -1,14 +1,29 @@
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { canonical, moneyDisplay, type Run } from '../../contracts/src/index.js';
+import {
+  canonical,
+  moneyDisplay,
+  type Assertion,
+  type CaseResult,
+  type Run,
+} from '../../contracts/src/index.js';
 import type { Store } from '../../runner/src/store.js';
 import { assessTestPath, type PathAssessment } from '../../diagnostics/src/index.js';
 import { caseOutcomes, outcomeSummary } from '../../grading/src/outcomes.js';
+import { shownReason } from './reasons.js';
 export const escapeHtml = (value: unknown): string =>
   String(value ?? '').replace(
     /[&<>"']/g,
     (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
   );
+/** An assertion's reason as shown, and the recorded text when the two differ (reasons.ts). */
+const reasonCell = (c: CaseResult, a: Assertion) => {
+  const shown = shownReason(c, a);
+  return (
+    escapeHtml(shown) +
+    (shown === a.reason ? '' : `<br><small>Recorded reason: ${escapeHtml(a.reason)}</small>`)
+  );
+};
 export function summary(run: Run) {
   const count = (verdict: string) => run.cases.filter((c) => c.verdict === verdict).length;
   return {
@@ -162,7 +177,7 @@ export function renderReport(run: Run, paths: Record<string, PathAssessment> = {
       .map(([name, value]) => `<tr><td>${e(name)}</td><td>${moneyDisplay(value ?? null)}</td></tr>`)
       .join('')}</table>
     <p class="note">${c.metrics.assumptions.map(e).join(' ')}</p>
-    <table><tr><th>Rule / layer</th><th>Verdict</th><th>Evidence / explanation</th></tr>${c.assertions.map((a) => `<tr><td>${e(a.ruleId)}<br><small>${e(a.layer)}</small></td><td>${e(a.verdict)}</td><td>${e(a.reason)}<br><small>Events: ${e(a.evidenceSeqs.join(', ') || 'none required')}</small></td></tr>`).join('')}</table>
+    <table><tr><th>Rule / layer</th><th>Verdict</th><th>Evidence / explanation</th></tr>${c.assertions.map((a) => `<tr><td>${e(a.ruleId)}<br><small>${e(a.layer)}</small></td><td>${e(a.verdict)}</td><td>${reasonCell(c, a)}<br><small>Events: ${e(a.evidenceSeqs.join(', ') || 'none required')}</small></td></tr>`).join('')}</table>
     <details><summary>Configured stimulus (check events for delivery)</summary><pre>${e(JSON.stringify(c.stimulus, null, 2))}</pre></details>
     <details><summary>Ordered observable evidence (${c.evidence.length} events)</summary>${c.evidence.map((event) => `<article><b>#${event.seq} ${e(event.kind)}</b> <small>${e(event.virtualTimeMs)} ms / ${e(event.trust)}</small><pre>${e(JSON.stringify(event.payload, null, 2))}</pre></article>`).join('')}</details>
     <p class="hash">Evidence SHA-256: ${e(c.evidenceHash)}<br>Canonical result: ${e(c.canonicalResultHash)}</p></section>`,
