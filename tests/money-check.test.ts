@@ -5,6 +5,7 @@ import path from 'node:path';
 import { DEFAULT_MANDATE } from '../packages/contracts/src/index.js';
 import { Store, executeRun, repoRoot } from '../packages/runner/src/index.js';
 import {
+  COMPONENT_SCENARIOS,
   CONTROLS,
   MONEY_RULES,
   NOT_APPLICABLE_REASON,
@@ -44,11 +45,27 @@ const blindPayerRun = () =>
   (blindPayer ??= outside('blind-payer', 'examples/baselines/blind-payer.ts'));
 
 describe('EmberTail Money Check', () => {
-  it('maps every rule to scenarios that exist, with no rule listed twice', () => {
+  it('maps every rule to scenarios that exist, with no rule listed twice', async () => {
     const ids = MONEY_RULES.map((r) => r.id);
     expect(new Set(ids).size).toBe(14);
     expect(ids[0]).toBe('EMI-01');
-    for (const r of MONEY_RULES) for (const s of r.scenarios) expect(s).toMatch(/^S\d{2}$/);
+    const fixture = JSON.parse(
+      await readFile(
+        path.join(await repoRoot(), 'fixtures/local-finance-v1/scenarios.json'),
+        'utf8',
+      ),
+    ) as { id: string }[];
+    const inFixture = new Set(fixture.map((s) => s.id));
+    const named = [...MONEY_RULES.flatMap((r) => r.scenarios), ...PLATFORM_CHECKS, ...CONTROLS];
+    // Every scenario named is in the public fixture, or is one of the component scenarios
+    // (S29 to S36) that only EmberTail's component runner has.
+    for (const s of named)
+      expect(inFixture.has(s) || COMPONENT_SCENARIOS.includes(s), s).toBe(true);
+    // The component list hides no public scenario, and names none the map has dropped.
+    for (const s of COMPONENT_SCENARIOS) {
+      expect(inFixture.has(s), s).toBe(false);
+      expect(named, s).toContain(s);
+    }
     for (const s of [...PLATFORM_CHECKS, ...CONTROLS])
       expect(MONEY_RULES.some((r) => r.scenarios.includes(s))).toBe(false);
   });

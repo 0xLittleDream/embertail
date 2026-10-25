@@ -151,6 +151,13 @@ export const MONEY_RULES: MoneyRule[] = [
 export const PLATFORM_CHECKS = ['S23', 'S24'];
 /** Plain controls: an agent that cannot pass these is not doing the basic job. */
 export const CONTROLS = ['S01', 'S36'];
+/**
+ * Scenarios named above that are not in the public fixture: S29 to S36 test payment
+ * components (gateways, wallet SDKs, payment clients) with EmberTail's component runner, which
+ * this repository does not include (docs/scenarios.md). They keep this map equal to the full
+ * rulebook; a Money Check run never contains them, so they never decide a rule here.
+ */
+export const COMPONENT_SCENARIOS = ['S29', 'S30', 'S31', 'S32', 'S33', 'S34', 'S35', 'S36'];
 
 export type RuleStatus = 'PASS' | 'FAIL' | 'INCONCLUSIVE' | 'NOT_APPLICABLE' | 'NOT_TESTED';
 
