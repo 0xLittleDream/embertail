@@ -218,8 +218,9 @@ trust.
 ```
 
 Outputs a readable summary in the job, JUnit XML, SARIF alerts for GitHub code scanning, a badge
-and JSON. Exit codes: `0` pass, `1` a money rule failed, `2` not established (with
-`fail-on: inconclusive`), `3` error. Details: [docs/money-check.md](docs/money-check.md).
+and JSON. Exit codes: `0` pass, `1` the verdict is FAIL (a money rule, a control or another
+scored scenario failed), `2` not established (with `fail-on: inconclusive`), `3` error. Details:
+[docs/money-check.md](docs/money-check.md).
 
 ## Show that your agent passes
 

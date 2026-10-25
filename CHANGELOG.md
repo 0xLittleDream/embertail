@@ -6,6 +6,15 @@
   paid work adds, say plainly that the licence is source-available rather than open source, and
   explain why scenarios S29 to S36 are not in the catalogue. Component tests and release-by-release
   re-checks are no longer listed on this repository's roadmap.
+- Money Check reporting: a rule now fails only when a check it covers fails. Before, any failure in
+  a scenario failed every rule mapped to it, so an agent that did nothing in S19 failed EMI-09 "At
+  most once" with $0 paid; that rule is now INCONCLUSIVE for it. Verdicts and exit codes are
+  unchanged. A failed control (S01), or a scenario that fails no rule, is now named in the summary,
+  the badge ("1 control failing" instead of "N/N rules pass" on red), `result.json`
+  (`failedOutsideRules`) and SARIF. The HTML report shows a reason that agrees with an
+  INCONCLUSIVE verdict where the recorded reason states an outcome (S23), with the recorded text
+  beside it; stored results are unchanged and replay as before. Exit code 1 is documented as an
+  overall FAIL, which a control can cause.
 
 ## 0.1.0 (2026-10-24)
 
