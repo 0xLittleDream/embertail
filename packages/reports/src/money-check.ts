@@ -10,7 +10,7 @@ import { caseOutcomes } from '../../grading/src/outcomes.js';
  * dashboards), SARIF 2.1.0 (code-scanning alerts), a shields.io endpoint badge, and a
  * machine-readable JSON result. Nothing here grades anything: verdicts come from the run.
  */
-export const MONEY_CHECK_VERSION = '0.1.0';
+export const MONEY_CHECK_VERSION = '0.1.1';
 
 /**
  * `checks`: the grader assertions (by rule ID) that can fail this rule. A scenario can test

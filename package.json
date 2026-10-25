@@ -1,6 +1,6 @@
 {
   "name": "embertail",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "Money Check: test whether your AI agent keeps money correct, on a simulated ledger.",

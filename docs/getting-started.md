@@ -113,7 +113,7 @@ The complete version of this agent, which passes `core` and `incidents`, is
 
 ```yaml
 - uses: actions/checkout@v4
-- uses: 0xLittleDream/embertail/action@v0.1.0
+- uses: 0xLittleDream/embertail/action@v0.1.1
   with:
     adapter: my_agent.json
     pack: incidents

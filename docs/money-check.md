@@ -193,7 +193,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: 0xLittleDream/embertail/action@v0.1.0
+      - uses: 0xLittleDream/embertail/action@v0.1.1
         with:
           adapter: my-agent.json
           pack: core

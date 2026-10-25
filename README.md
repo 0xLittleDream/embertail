@@ -211,7 +211,7 @@ trust.
 
 ```yaml
 - uses: actions/checkout@v4
-- uses: 0xLittleDream/embertail/action@v0.1.0
+- uses: 0xLittleDream/embertail/action@v0.1.1
   with:
     adapter: path/to/your-agent.json
     pack: incidents
