@@ -152,6 +152,8 @@ export function addCheckCommand(
             verdict: result.verdict,
             counts: result.counts,
             rules: Object.fromEntries(result.rules.map((r) => [r.id, r.status])),
+            // Failed scenarios that fail no rule, such as the S01 control: they still mean exit 1.
+            failedOutsideRules: result.failedOutsideRules,
             runId: run.id,
             report,
             outputs: files,
